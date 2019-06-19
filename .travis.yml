@@ -48,7 +48,9 @@ matrix:
     - name: "Mac OS X"
       os: osx
       osx_image: xcode9.4
-      env: MATRIX_EVAL="CC=gcc"
+      env:
+       - MATRIX_EVAL="CC=gcc"
+       - CFLAGS="-arch x86_64"
 
 #
 before_install:
@@ -64,7 +66,7 @@ before_install:
 before_script:
   - util/bldlvlck
   - ./autogen.sh
-  - ./configure --enable-regina-rexx
+  - ./configure --enable-regina-rexx --host=x86_64-apple-darwin17.4.0
   - bash -c '${CC} --version'
 
 #
