@@ -1,4 +1,6 @@
-os: linux
+os:
+ - linux
+ - osx
 dist: trusty
 language: c
 sudo: required
@@ -6,10 +8,12 @@ sudo: required
 matrix:
   include:
     - name: "Ub 14.04 -- gcc 4.8.4"
+      os: linux
       dist: trusty
       env: MATRIX_EVAL="CC=gcc"
 
     - name: "Ub 14.04 -- gcc 6.5.0"
+      os: linux
       dist: trusty
       addons:
         apt:
@@ -18,6 +22,7 @@ matrix:
       env: MATRIX_EVAL="CC=gcc-6"
 
     - name: "Ub 14.04 -- gcc 7.4.0"
+      os: linux
       dist: trusty
       addons:
         apt:
@@ -26,20 +31,27 @@ matrix:
       env: MATRIX_EVAL="CC=gcc-7"
 
     - name: "Ub 14.04 -- clang 5.0.0"
+      os: linux
       dist: trusty
       env: MATRIX_EVAL="CC=clang"
 
     - name: "Ub 16.04 -- gcc 5.4.0"
+      os: linux
       dist: xenial
       env: MATRIX_EVAL="CC=gcc"
 
     - name: "Ub 16.04 -- clang 7.0.0"
+      os: linux
       dist: xenial
       env: MATRIX_EVAL="CC=clang"
 
+    - name: "Mac OS X"
+      os: osx
+      env: MATRIX_EVAL="CC=gcc"
+
 #
 before_install:
-  - sudo apt-get install -y regina-rexx libregina3-dev
+  - if [ "$TRAVIS_OS_NAME" = "linux" ]; sudo apt-get install -y regina-rexx libregina3-dev; fi
   - eval "${MATRIX_EVAL}"
 
 #
