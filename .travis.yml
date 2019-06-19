@@ -63,10 +63,12 @@ before_install:
 #
 before_script:
   - which ar
+  - which ranlib
   - util/bldlvlck
   - ./autogen.sh
 #  - ./configure --enable-regina-rexx --host=x86_64-apple-darwin17.4.0
-  - ./configure --host=x86_64-apple-darwin17.4.0
+  - ./configure --enable-static --host=x86_64-apple-darwin17.4.0
+  - echo executing bash -c ${CC} --version
   - bash -c '${CC} --version'
 
 # x86_64-apple-darwin13-ar
