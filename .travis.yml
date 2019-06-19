@@ -7,43 +7,43 @@ sudo: required
 #
 matrix:
   include:
-    - name: "Ub 14.04 -- gcc 4.8.4"
-      os: linux
-      dist: trusty
-      env: MATRIX_EVAL="CC=gcc"
-
-    - name: "Ub 14.04 -- gcc 6.5.0"
-      os: linux
-      dist: trusty
-      addons:
-        apt:
-          sources:  ubuntu-toolchain-r-test
-          packages: g++-6
-      env: MATRIX_EVAL="CC=gcc-6"
-
-    - name: "Ub 14.04 -- gcc 7.4.0"
-      os: linux
-      dist: trusty
-      addons:
-        apt:
-          sources:  ubuntu-toolchain-r-test
-          packages: g++-7
-      env: MATRIX_EVAL="CC=gcc-7"
-
-    - name: "Ub 14.04 -- clang 5.0.0"
-      os: linux
-      dist: trusty
-      env: MATRIX_EVAL="CC=clang"
-
-    - name: "Ub 16.04 -- gcc 5.4.0"
-      os: linux
-      dist: xenial
-      env: MATRIX_EVAL="CC=gcc"
-
-    - name: "Ub 16.04 -- clang 7.0.0"
-      os: linux
-      dist: xenial
-      env: MATRIX_EVAL="CC=clang"
+#    - name: "Ub 14.04 -- gcc 4.8.4"
+#      os: linux
+#      dist: trusty
+#      env: MATRIX_EVAL="CC=gcc"
+#
+#    - name: "Ub 14.04 -- gcc 6.5.0"
+#      os: linux
+#      dist: trusty
+#      addons:
+#        apt:
+#          sources:  ubuntu-toolchain-r-test
+#          packages: g++-6
+#      env: MATRIX_EVAL="CC=gcc-6"
+#
+#    - name: "Ub 14.04 -- gcc 7.4.0"
+#      os: linux
+#      dist: trusty
+#      addons:
+#        apt:
+#          sources:  ubuntu-toolchain-r-test
+#          packages: g++-7
+#      env: MATRIX_EVAL="CC=gcc-7"
+#
+#    - name: "Ub 14.04 -- clang 5.0.0"
+#      os: linux
+#      dist: trusty
+#      env: MATRIX_EVAL="CC=clang"
+#
+#    - name: "Ub 16.04 -- gcc 5.4.0"
+#      os: linux
+#      dist: xenial
+#      env: MATRIX_EVAL="CC=gcc"
+#
+#    - name: "Ub 16.04 -- clang 7.0.0"
+#      os: linux
+#      dist: xenial
+#      env: MATRIX_EVAL="CC=clang"
 
     - name: "Mac OS X"
       os: osx
@@ -57,7 +57,7 @@ before_install:
 #  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew upgrade; fi
 #  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew info gcc; fi
 #  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew install gcc; fi
-  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew install regina-rexx; fi
+  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew install gcc regina-rexx; fi
   - eval "${MATRIX_EVAL}"
 
 #
