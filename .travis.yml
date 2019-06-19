@@ -49,7 +49,7 @@ matrix:
       os: osx
       osx_image: xcode9.4
       env:
-       - MATRIX_EVAL="CC=gcc -arch x86_64"
+       - MATRIX_EVAL="\"CC=gcc -arch x86_64\""
 #
 before_install:
   - if [ "$TRAVIS_OS_NAME" = "linux" ]; then sudo apt-get install -y regina-rexx libregina3-dev; fi
