@@ -57,17 +57,19 @@ before_install:
 #  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew upgrade; fi
 #  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew info gcc; fi
 #  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew install gcc; fi
-  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew install gcc regina-rexx; fi
+#  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew install gcc regina-rexx; fi
   - eval "${MATRIX_EVAL}"
 
 #
 before_script:
+  - which ar
   - util/bldlvlck
   - ./autogen.sh
-  - ./configure --enable-regina-rexx --host=x86_64-apple-darwin17.4.0
+#  - ./configure --enable-regina-rexx --host=x86_64-apple-darwin17.4.0
+  - ./configure --host=x86_64-apple-darwin17.4.0
   - bash -c '${CC} --version'
 
-#
+# x86_64-apple-darwin13-ar
 script:
-  - make -j 2
+  - make -j 2 AR=x86_64-apple-darwin1X-ar
   - make check
