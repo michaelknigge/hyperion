@@ -95,4 +95,4 @@ build_script:
 
     c:\MinGW\msys\1.0\bin\zip.exe -rj Hyperion-%VERSION%-x86.zip C:\projects\hyperion\msvc.dllmod.bin
 artifacts:
-- path: '*.zip'
+- path: 'Hyperion-*.zip'
