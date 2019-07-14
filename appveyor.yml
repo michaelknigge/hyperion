@@ -67,7 +67,7 @@ build_script:
 
     unzip ooRexx-4.2.0-source.zip
 
-    cp ooRexx-4.2.0\api\platform\windows\* ooRexx-4.2.0\api
+    copy ooRexx-4.2.0\api\platform\windows\* ooRexx-4.2.0\api
 
     set INCLUDE=C:\Program Files (x86)\Microsoft SDKs\Windows\v7.1A\Include
 
