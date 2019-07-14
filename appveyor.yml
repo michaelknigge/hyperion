@@ -63,7 +63,7 @@ build_script:
 
     cd ..
 
-    curl -L -s -O https://sourceforge.net/projects/oorexx/files/oorexx/4.2.0/ooRexx-4.2.0-source.zip/download
+    curl -L -s -O https://sourceforge.net/projects/oorexx/files/oorexx/4.2.0/ooRexx-4.2.0-source.zip
 
     unzip ooRexx-4.2.0-source.zip
 
