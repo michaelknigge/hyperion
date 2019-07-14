@@ -1,0 +1,90 @@
+version: 4.2.0.{build}
+branches:
+  only:
+  - enhanced
+image: Visual Studio 2015
+init:
+- ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+build_script:
+- cmd: >-
+    mkdir zlib
+
+    cd zlib
+
+    curl -s -O http://www.softdevlabs.com/downloads/ZLIB1-1.2.11-bin-lib-inc-vc2008-x86-x64.zip
+
+    unzip ZLIB1-1.2.11-bin-lib-inc-vc2008-x86-x64.zip
+
+    set ZLIB_DIR=%cd%
+
+    cd ..
+
+    mkdir bzip
+
+    cd bzip
+
+    curl -s -O http://www.softdevlabs.com/downloads/BZIP2-1.0.6-bin-lib-inc-vc2008-x86-x64.zip
+
+    unzip BZIP2-1.0.6-bin-lib-inc-vc2008-x86-x64.zip
+
+    set BZIP2_DIR=%cd%
+
+    cd ..
+
+    mkdir pcre
+
+    cd pcre
+
+    curl -s -O http://www.softdevlabs.com/downloads/PCRE-6.4.1-bin-lib-inc-vc2008-x86-x64.zip
+
+    unzip PCRE-6.4.1-bin-lib-inc-vc2008-x86-x64.zip
+
+    set PCRE_DIR=%cd%
+
+    cd ..
+
+    mkdir rexx32
+
+    cd rexx32
+
+    curl -L -s -O https://sourceforge.net/projects/regina-rexx/files/regina-rexx/3.9.1/Regina391w32.zip
+
+    unzip Regina391w32.zip
+
+    cd ..
+
+    mkdir rexx64
+
+    cd rexx64
+
+    curl -L -s -O https://sourceforge.net/projects/regina-rexx/files/regina-rexx/3.9.1/Regina391w64.zip
+
+    unzip Regina391w64.zip
+
+    cd ..
+
+    set INCLUDE=C:\Program Files (x86)\Microsoft SDKs\Windows\v7.1A\Include
+
+    set REGINA_LANG_DIR=%cd%\rexx64
+
+    call makefile.bat -a RETAIL-X64 makefile.msvc 64
+
+    copy %cd%\rexx64\regina.dll C:\projects\hyperion\msvc.AMD64.bin
+
+    copy %cd%\rexx64\regutil.dll C:\projects\hyperion\msvc.AMD64.bin
+
+    set REGINA_LANG_DIR=%cd%\rexx32
+
+    call makefile.bat -a RETAIL makefile.msvc 64
+
+    copy %cd%\rexx32\regina.dll C:\projects\hyperion\msvc.dllmod.bin
+
+    copy %cd%\rexx32\regutil.dll C:\projects\hyperion\msvc.dllmod.bin
+
+    call _dynamic_version.cmd
+
+    c:\MinGW\msys\1.0\bin\zip.exe -rj Hyperion-%VERSION%-x64.zip C:\projects\hyperion\msvc.AMD64.bin
+
+    c:\MinGW\msys\1.0\bin\zip.exe -rj Hyperion-%VERSION%-x86.zip C:\projects\hyperion\msvc.dllmod.bin
+artifacts:
+- path: '*.zip'
